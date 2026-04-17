@@ -1,4 +1,4 @@
-# vrata_suci_fast_v2.R
+# vrata_suci_fast_v3.R
 # ===============================================================
 # Final audited production-grade optimized version
 # Render Free Tier Safe
@@ -419,47 +419,4 @@ find_vratas_fast <- function(n_panjika){
   )
 
   out
-}
-
-# ===============================================================
-# PLUMBER ENDPOINT
-# ===============================================================
-
-#* @post /generate-vrata-suci
-function(lat, lon, tz,
-         start_dd, start_mm, start_yyyy,
-         end_dd, end_mm, end_yyyy,
-         res){
-
-  place <- c(as.numeric(lat),as.numeric(lon),as.numeric(tz))
-
-  start_date <- gregorian_to_jd(
-    as.integer(start_dd),
-    as.integer(start_mm),
-    as.integer(start_yyyy)
-  )
-
-  end_date <- gregorian_to_jd(
-    as.integer(end_dd),
-    as.integer(end_mm),
-    as.integer(end_yyyy)
-  )
-
-  if((end_date-start_date) > MAX_RANGE_DAYS){
-    res$status <- 400
-    return(list(error="Maximum supported range is 10 years"))
-  }
-
-  n_panjika <- get_basic_panjika_fast(start_date,end_date,place)
-  vrata_table <- find_vratas_fast(n_panjika)
-
-  buf <- textConnection("output_text", open = "w")
-  write.csv(vrata_table, buf, row.names = FALSE)
-  close(buf)
-  csv_text <- paste(output_text, collapse = "\n")
-
-  res$setHeader("Content-Type","text/csv")
-  res$setHeader("Content-Disposition","attachment; filename=vrata_suci.csv")
-
-  return(csv_text)
 }
