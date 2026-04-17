@@ -1,4 +1,3 @@
-# invoking the "already installed" VedicDateTime package
 library(VedicDateTime)
 library(memoise)
 
@@ -255,7 +254,6 @@ get_panjika_12hr <- function(start_date_jd, end_date_jd, place) {
     nakshatra_d <- memo_nakshatra(jd, place)
     nakshatra_d_sec <- to_sec(nakshatra_d[2:4])
 
-    amanta_masa <- memo_masa(jd, place)
     vara <- memo_vaara(jd)
     gc_date <- memo_gregorian(jd)
 
@@ -282,8 +280,6 @@ get_panjika_12hr <- function(start_date_jd, end_date_jd, place) {
     }
 
     rows[[idx]] <- c(
-      amanta_masa,
-      Pakshas[tithi_d[1]],
       paste(gc_date[3], str1, gc_date[2], str1, gc_date[1]),
       vara,
       Tithis[tithi_d[1]],
@@ -294,15 +290,15 @@ get_panjika_12hr <- function(start_date_jd, end_date_jd, place) {
       paste(nakshatra_d2[1], str2, nakshatra_d2[2]),
       paste(sunrise_d[1], str2, sunrise_d[2]),
       paste(sunset_d2[1], str2, sunset_d2[2]),
-      paste(arunodaya_d[1], str2, arunodaya_d[2], str2, arunodaya_d[3])
+      paste(arunodaya_d[1], str2, arunodaya_d[2])
     )
 
     idx <- idx + 1
   }
 
   build_df_fast(rows,
-    c("Amanta_Masa","Paksha","Date","Vara","Tithi",
-      "Tithi_DIRA","Tithi_Change","Nakshatra",
-      "Nakshatra_DIRA","Nakshatra_Change",
-      "Sunrise","Sunset","Arunodaya"))
+    c("Date","Vara","Tithi",
+      "Tithi_DIRA","Tithi_Samaya","Nakshatra",
+      "Nakshatra_DIRA","Nakshatra_Samaya",
+      "Suryodaya","Suryasta","Arunodaya"))
 }
