@@ -666,7 +666,7 @@
             <option value="24hr">24 hr format</option>
             <option value="24hr_kshaya">24 hr format + Kṣaya Tithi entries</option>
             <option value="24hr_arunodaya">24 hr format + Aruṇodaya Time entries</option>
-            <option value="12hr">12 hr format</option>
+            <option value="12hr">12 hr classic Panjikā format + Aruṇodaya Time entries</option>
           </select>
         </div>
 
@@ -1000,7 +1000,7 @@
 
       const endpoint ='generate-panjika';
 
-      btn.textContent = 'Generating…(This may take upto a minute)';
+      btn.textContent = 'Generating…(This may take upto a couple of minutes)';
       btn.disabled = true;
 
       try {
@@ -1055,7 +1055,7 @@
       const end   = parseDateField('vs-end');
       const loc   = parseLocation('vs-location');
 
-      btn.textContent = 'Generating…(This may take upto a minute)';
+      btn.textContent = 'Generating…(This may take upto a couple of minutes)';
       btn.disabled = true;
 
       try {
