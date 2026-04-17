@@ -52,7 +52,8 @@ function(lat, lon, tz,
 
   res$setHeader("Content-Type", "text/csv")
   res$setHeader("Content-Disposition", paste0("attachment; filename=panjika_", style, ".csv"))
-  return(csv_text)
+  res$body <- csv_text
+  return(res)
 }
 
 # ── Vrata Sūcī endpoint ──────────────────────────────────────
@@ -81,5 +82,6 @@ function(lat, lon, tz,
 
   res$setHeader("Content-Type", "text/csv")
   res$setHeader("Content-Disposition", "attachment; filename=vrata_suci.csv")
-  return(csv_text)
+  res$body <- csv_text
+  return(res)
 }
