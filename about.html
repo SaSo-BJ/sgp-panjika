@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Śrī Gadādhara Parivāra Panjikā</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Devanagari:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS (same as index.html) ───────────────────────── */
+    :root {
+      --blue-deep:   #0b1728;
+      --blue-mid:    #0f1f3d;
+      --blue-nav:    #09152a;
+      --blue-subtle: #1e3060;
+      --blue-border: #2e4a7a;
+      --gold:        #d4a017;
+      --gold-dim:    #c9a84c;
+      --gold-muted:  #a89060;
+      --gold-hover:  #c9960c;
+      --cream:       #f5e6c0;
+      --cream-dim:   #e8d8a8;
+      --text-muted:  #7a98c0;
+      --text-hint:   #3a5878;
+
+      --font-display:    'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+      --font-body:       'EB Garamond', Georgia, serif;
+      --font-devanagari: 'Noto Serif Devanagari', Georgia, serif;
+    }
+
+    /* ── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--blue-mid);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    nav {
+      background: var(--blue-nav);
+      border-bottom: 1px solid var(--blue-subtle);
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      gap: 28px;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding-bottom: 3px;
+      border-bottom: 1.5px solid transparent;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--cream-dim); }
+    .nav-link.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    .nav-about {
+      margin-left: auto;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 6px 20px;
+      border-radius: 3px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .nav-about:hover { background: rgba(212,160,23,.12); }
+
+    /* ── PAGE LAYOUT ───────────────────────────────────────── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 28px 96px;
+    }
+
+    /* ── PAGE HEADING ──────────────────────────────────────── */
+    .page-heading {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: .8px;
+      margin-bottom: 10px;
+    }
+    .heading-rule {
+      width: 44px;
+      height: 1.5px;
+      background: var(--gold);
+      opacity: .45;
+      margin-bottom: 36px;
+    }
+
+    /* ── PROSE ─────────────────────────────────────────────── */
+    .prose {
+      color: var(--cream);
+      font-size: 17px;
+      line-height: 1.85;
+      margin-bottom: 52px;
+    }
+    .prose p + p { margin-top: 18px; }
+
+    /* ── SECTION HEADING ───────────────────────────────────── */
+    .sec-heading {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: .6px;
+      margin-bottom: 8px;
+    }
+    .sec-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .38;
+      margin-bottom: 22px;
+    }
+
+    /* ── BULLET LIST ───────────────────────────────────────── */
+    .about-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 52px;
+    }
+    .about-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--blue-subtle);
+      font-size: 16px;
+      color: var(--cream);
+      line-height: 1.7;
+    }
+    .about-list li:first-child { border-top: 1px solid var(--blue-subtle); }
+    .about-list li::before {
+      content: '·';
+      color: var(--gold);
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .about-list a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--cream);
+      transition: color .2s, border-color .2s;
+    }
+    .about-list a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── IMAGE CREDITS ─────────────────────────────────────── */
+    .img-credits {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 52px;
+    }
+    .img-credits li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--blue-subtle);
+      font-size: 16px;
+      color: var(--cream);
+      line-height: 1.7;
+    }
+    .img-credits li:first-child { border-top: 1px solid var(--blue-subtle); }
+    .img-credits li::before {
+      content: '·';
+      color: var(--gold);
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .img-credits a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .img-credits a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .img-label {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-right: 4px;
+    }
+
+    /* ── BACK LINK ─────────────────────────────────────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold-muted);
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+      transition: color .2s, border-color .2s;
+      margin-top: 8px;
+    }
+    .back-link:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      background: var(--blue-nav);
+      border-top: 1px solid var(--blue-subtle);
+      padding: 18px 28px;
+      text-align: center;
+    }
+    footer p {
+      color: var(--blue-border);
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav aria-label="Site navigation">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="index.html#panjika">Panjikā</a>
+    <a class="nav-link" href="index.html#vrata">Vrata Sūcī</a>
+    <button class="nav-about" onclick="window.location.href='about.html'">About</button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- Heading -->
+    <h1 class="page-heading">About</h1>
+    <div class="heading-rule"></div>
+
+    <!-- About paragraph — fill in your text here -->
+    <div class="prose">
+      <p>
+        This website is a Minimum Viable Product style prototype. The developer has built this tool under the directions of his professor, who is a direct disciple of Śrī Haridāsa Śāstrī Maharāja. The said professor has also assisted in the publication of Śrī Gadādhara Parivāra Panjikā by Śrī Haridāsa Śāstrī Go Sevā Saṁsthāna for the past several years. 
+      </p>
+
+      <p>The output for Panjikā data is generated via the VedicDateTime package in R and its accuracy has been validated for a fairly large sample.
+      </p>
+
+      <p>The Ekādaśī Vrata Sūcī is generated via computations on the Panjikā data (as per the guidelines in Śrī Haribhakti Vilāsa). Its output has been validated and reconciled with Ekādaśī Vrata Sūcī for the years 2019-2025. However, it is still advised to use the Vrata Sūcī only for tallying your computations.
+      </p>
+
+      <p>DISCLAIMER(S): For the sake of simplicity, a muhurta has been approximated as 48 minutes to determine the Aruṇodaya timings | The conditions for Viṣṇu Śr̥ṁkhala Yoga have NOT been encoded for Vrata determination | This is a not-for-profit & a non-commercial tool developed solely using free-tier resources.</p>
+    </div>
+
+    <!-- Tech / Tools used -->
+    <h2 class="sec-heading">Tech &amp; Tools</h2>
+    <div class="sec-rule"></div>
+    <ul class="about-list">
+      <li>Website Architecture & Planning Assistant - Claude Sonnet 4.6</li>
+      <li>Frontend Code - Claude Sonnet 4.6</li>
+      <li>Static Frontend Hosting - GitHub Pages</li>
+      <li>Backend - Render (750 instance hours per month) | Docker</li>
+      <li> <a href="https://cran.r-project.org/package=VedicDateTime" target="_blank" rel="noopener noreferrer">Backend Astronomical Computation - R VedicDateTime package </a></li>
+      <li> <a href="https://cran.r-project.org/web/packages/memoise/" target="_blank" rel="noopener noreferrer">Caching Intermediate Results - R Memoise package </a></li>
+      <li>REST API Framework - Plumber</li>
+      <li>Deployment ready script refactoring - Claude Sonnet 4.6; ChatGPT - 5.3 </li>
+      <li>Git provider - GitHub</li>
+      
+      
+      <li>Text Editor - Sublime Text (Well, it's worth mentioning! :))</li>
+    </ul>
+
+    <!-- Image Details -->
+    <h2 class="sec-heading">Image Credits</h2>
+    <div class="sec-rule"></div>
+    <ul class="img-credits">
+      <li>
+        <span>
+          <span class="img-label">Śrī Śrī Rādhā Kr̥ṣṇa —</span>
+          <a>
+            Recreated by ChatGPT - 5.3
+            (Source: Gadādhara Parivāra Panjikā, Saṁvat - 2076,
+             Published by: Śrī Haridāsa Śāstrī Go Sevā Saṁsthāna)
+          </a>
+        </span>
+      </li>
+      <li>
+        <span>
+          <span class="img-label">Teen Kr̥ṣṇa with Cow —</span>
+          <a href="http://www.chitrakalaartgallery.com/site/productdetails?id=teen-krishna-with-cow" target="_blank" rel="noopener noreferrer">
+            Mrs. Suman Agrawal | Chitrakala Art Gallery
+          </a>
+        </span>
+      </li>
+      <li>
+        <span>
+          <span class="img-label">Śrī Rāma-Kr̥ṣṇa-Caitanya Mahāprabhu —</span>
+          <a href="https://www.exoticindiaart.com/product/paintings/composite-image-of-shri-krishna-shri-rama-and-chaitanya-mahaprabhu-pk63/?srsltid=AfmBOoqL0MUFFFoHxU2HS77XzqHeiWzwTrGS78_NhHeIBr1vz2kK21tL" target="_blank" rel="noopener noreferrer">
+            Rabi Behera | Exotic India Art
+          </a>
+        </span>
+      </li>
+    </ul>
+
+    <!-- Back to home -->
+    <a class="back-link" href="index.html">
+      ← Back to Home Page
+    </a>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Śrī Gadādhara Parivāra Panjikā &nbsp;·&nbsp; Non-commercial &nbsp;·&nbsp; April 2026 </p>
+  </footer>
+
+  <script>
+    /* ── BACKEND URL (same as index.html) ───────────────────── */
+    const BACKEND_URL = 'https://your-plumber-backend.onrender.com';
+
+    /* ── WAKE UP BACKEND ON PAGE LOAD ───────────────────────── */
+    (async function wakeBackend() {
+      try {
+        await fetch(`${BACKEND_URL}/ping`, {
+          method: 'GET',
+          signal: AbortSignal.timeout(10000)
+        });
+      } catch (e) {
+        /* silently ignore — backend may still be spinning up */
+      }
+    })();
+  </script>
+
+</body>
+</html>
