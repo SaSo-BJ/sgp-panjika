@@ -1,52 +1,57 @@
 # ============================================================
-# Production Dockerfile for Śrī Gadhādhara Parivāra Panjikā
+# Production Dockerfile for Śrī Gadādhara Parivāra Panjikā
 # Optimized for Render deployment
 # ============================================================
 
 FROM rocker/r-ver:4.3.2
 
-# Prevent interactive prompts during package install
+# Prevent interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
 # ------------------------------------------------------------
-# Install required system dependencies
+# Install system dependencies (stable + minimal)
 # ------------------------------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
-    libssl-dev \
     libxml2-dev \
     libgit2-dev \
+    build-essential \
     ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # ------------------------------------------------------------
-# Install required R packages
+# Install R packages (with better reliability)
 # ------------------------------------------------------------
-RUN R -e "install.packages( \
-    c('plumber','memoise','VedicDateTime'), \
-    repos='https://cloud.r-project.org/', \
-    Ncpus=parallel::detectCores() \
-)"
+RUN R -e "options(repos = c(CRAN = 'https://cloud.r-project.org')); \
+          install.packages(c('plumber','memoise'), Ncpus = parallel::detectCores()); \
+          install.packages('VedicDateTime', Ncpus = parallel::detectCores())"
 
 # ------------------------------------------------------------
-# Create app directory
+# Set working directory
 # ------------------------------------------------------------
 WORKDIR /app
 
 # ------------------------------------------------------------
-# Copy application files
+# Copy only necessary files first (better caching)
+# ------------------------------------------------------------
+COPY plumber.R /app/
+
+# (Optional: copy other required scripts explicitly if needed)
+# COPY *.R /app/
+
+# ------------------------------------------------------------
+# Copy rest of the project
 # ------------------------------------------------------------
 COPY . /app
 
 # ------------------------------------------------------------
 # Render provides PORT dynamically
-# Default fallback = 10000
 # ------------------------------------------------------------
 ENV PORT=10000
 
 # ------------------------------------------------------------
-# Expose Render-compatible port
+# Expose port
 # ------------------------------------------------------------
 EXPOSE 10000
 
